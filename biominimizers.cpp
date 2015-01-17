@@ -47,44 +47,44 @@ int main(int argc, char *argv[]) //as arguments we send name od the file, w and 
 void Minimizers(char* buffer, int w, int k)
 {
  
-	char* squ_substring = 0; //podsekvenca niza(buffera)
-	char* k_substring = 0; //svaki susjedni k-mer
-	char* min_k_substring = 0; //minimizer-minimalni podstring
-	int squ_number = 0; //broj sekvenci unutar niza
-	int squ_length = 0; //duljina sekvence
-	int min_index = 0; //indeks minimalnog podstringa u podsekvenci
-	char* end_minimizer = 0; //svaki susjedni end k-mer
-	char* min_end_minimizer = 0; //minimialni end podstring
+	char* squ_substring = 0; //subsequence of buffer
+	char* k_substring = 0; //neighbour k-mers
+	char* min_k_substring = 0; //minimizer
+	int squ_number = 0; //number of sequences in buffer
+	int squ_length = 0; //sequence length
+	int min_index = 0; //index of minimizer in subsequence
+	char* end_minimizer = 0; //neighbour end k-mers
+	char* min_end_minimizer = 0; //end minimizer
 	
 	
-	//izracunajemo duljinu podsekvence i broj podsekvenci u nizu
+	//counting sequence lentgh and number of sequences  in buffer
 	squ_length = (w + k - 1); 
 	squ_number = strlen(buffer) - squ_length + 1; 
 
 
 	if(squ_length > strlen(buffer))
-		printf("Unijeli ste nemoguce vrijednosti");//l=w+k-1, tako da w+k-1 ne moze biti veci od sekvence
+		printf("Unijeli ste nemoguce vrijednosti");//l=w+k-1,  w+k-1 cant be larger than length of sequence
 
-	//alociramo potrebni memorijski prostor za velicine
+	//allocating memory
 	squ_substring = (char*)malloc(squ_length);
 	k_substring = (char*)malloc(k);
 	min_k_substring = (char*)malloc(k);
 	end_minimizer = (char*)malloc(k);
 	min_end_minimizer = (char*)malloc(k);
 
-	//trazimo minimizere
+	//looking for minimizers
 
-	for(int i=0;i<squ_number;i++) //uzimaju se susjedne sekvence dok i!=squ_number
+	for(int i=0;i<squ_number;i++) //we are taking neighbour sequences until squ-number is not equal to i
 	{
-		strncpy(squ_substring,buffer+i,squ_length); //nalazimo posekvencu
+		strncpy(squ_substring,buffer+i,squ_length); //setting subsequences
 		squ_substring[squ_length]= '\0';
 		printf("\n\nsubstring je %s", squ_substring);
 
-		strncpy(min_k_substring,squ_substring,k); //postavljamo prvi k-mer na minimalni
+		strncpy(min_k_substring,squ_substring,k); //setting first k-mer to minimum one
 		min_k_substring[k]='\0';
 		printf("\npocetni je %s", min_k_substring);
 
-		//uzimamo susjedne k-mere i ako je susjedni manji od prethodnog on postaje minimalni
+		//if neighbour k-mer is smaller than current minimum one, than it becomes minimum one - minimizer
 		for(int j=0;j<w;j++)
 		{
 			strncpy(k_substring,squ_substring+j,k);
@@ -94,18 +94,18 @@ void Minimizers(char* buffer, int w, int k)
 			if(strcmp(k_substring,min_k_substring) < 0)
 			{
 				strncpy(min_k_substring,k_substring,k);
-				min_index=j; //spremamo indeks minimalnog
+				min_index=j; //saving index of minimizer
 			}
 		}
 		
-		if(i==0) //provjera za lijeve end minimizere
+		if(i==0) //looking for left end minimizers
 		{
 			strncpy(min_end_minimizer,squ_substring,k);
 			min_end_minimizer[k]='\0';
 
-			printf("\nend minimizer je %s", min_end_minimizer);//ispisuje prvi k-mer, posto je on svakako lijevi end minimizer
+			printf("\nend minimizer je %s", min_end_minimizer);//printfs the first k-mer because it is 100% end-minimizer
 
-			for(int j=0;j<min_index;j++) //ako je susjedni k-mer manji, postaje i on minimizer
+			for(int j=0;j<min_index;j++) //if neighbour minimizer is smaller than current one than it too becomes minimizer
 			{
 				strncpy(end_minimizer,squ_substring+j,k);
 				end_minimizer[k]='\0';
@@ -117,7 +117,7 @@ void Minimizers(char* buffer, int w, int k)
 			}
 		}
 
-		if (i == squ_number - 1) //trazimo za desni kraj sekvence, slicno kao za lijevi, samo obrnuto
+		if (i == squ_number - 1) //looking for right end minimizers, similar to looking for left ones, just vice versa
 		{
 			strncpy(min_end_minimizer, (squ_substring + squ_length - k), k); 
 			min_end_minimizer[k] = '\0';
