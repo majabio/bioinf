@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) //as arguments we send name od the file, w and 
 		{
 			fread(buffer, 1, length, f);
 			buffer[length]= '\0';
-			printf("\nbuffer je %s\n", buffer);
+			//printf("\nbuffer je %s\n", buffer);
 		}
 	}
 
@@ -78,18 +78,18 @@ void Minimizers(char* buffer, int w, int k)
 	{
 		strncpy(squ_substring,buffer+i,squ_length); //setting subsequences
 		squ_substring[squ_length]= '\0';
-		printf("\n\nsubstring je %s", squ_substring);
+		//	printf("\n\nsubstring je %s", squ_substring);
 
 		strncpy(min_k_substring,squ_substring,k); //setting first k-mer to minimum one
 		min_k_substring[k]='\0';
-		printf("\npocetni je %s", min_k_substring);
+		//	printf("\npocetni je %s", min_k_substring);
 
 		//if neighbour k-mer is smaller than current minimum one, than it becomes minimum one - minimizer
 		for(int j=0;j<w;j++)
 		{
 			strncpy(k_substring,squ_substring+j,k);
 			k_substring[k]='\0';
-			printf("\nk_substring je %s", k_substring);
+			//	printf("\nk_substring je %s", k_substring);
 			
 			if(strcmp(k_substring,min_k_substring) < 0)
 			{
