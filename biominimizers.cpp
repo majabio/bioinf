@@ -18,18 +18,17 @@ int main(int argc, char *argv[]) //kao argumente saljemo ime datoteke, w i k
 
 	f = fopen(file_name, "r");
 	
-	if(!f)
+	if (!f)
 		printf("\n Datoteka se nije uspjesno otvorila");
 	else
 	{
-	//trazimo kraj datoteke pa tako i njenu duljinu,a onda se vracamo na pocetak datoteke
+		//trazimo kraj datoteke pa tako i njenu duljinu,a onda se vracamo na pocetak datoteke
 		fseek (f, 0, SEEK_END);
 		length = ftell (f);
 		fseek (f, 0, SEEK_SET);
 		buffer = (char*)malloc(length); 
 	
-	//spremamo sadrzaj datoteke u buffer kao niz
-	
+		//spremamo sadrzaj datoteke u buffer kao niz
 		if (buffer)
 		{
 			fread(buffer, 1, length, f);
@@ -40,7 +39,7 @@ int main(int argc, char *argv[]) //kao argumente saljemo ime datoteke, w i k
 
 	fclose(f);
 
-	Minimizers(buffer, w, k); //funnkcija koja trazi minimizere
+	Minimizers(buffer, w, k); //funkcija koja trazi minimizere
 
 	return 0;
 }
