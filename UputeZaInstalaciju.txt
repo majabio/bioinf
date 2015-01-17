@@ -1,0 +1,14 @@
+Program radi na biolinux platofirmi, biolinux je pokrenut na Oracle VirtualBox virtualnoj masini..
+
+Upute za instalaciju i izvoðenje:
+
+1.Instalirati VirtualBox
+2.Skinuti OVA Biolinux 8.0.5 file i dodati ga u VirtualBox
+3.Pokrenuti VirtualBox i Biolinux 8.0.5
+4.Uæi u Biolinux 8.0.5 (prva linija)
+5.Uci u terminal
+6.Napraviti git clone sa repozitorija
+7.Pozicionirati se na file gdje je spremljeno to sa github repozitorija
+8.Buildati program sa "gcc biominimizers.cpp -o biominimizers"
+9.Pokrenuti program sa "./biominimizers imedatoteke.txt w k", gdje je "imedatoteke" ime datoteke koju zelimo iscitati, 
+                                                              a w i k zeljene sirina prozora i broj znakova k-mera
