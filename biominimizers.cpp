@@ -6,15 +6,15 @@
 void Minimizers(char*, int, int);
 
 
-int main(int argc, char *argv[]) //kao argumente saljemo ime datoteke, w i k
+int main(int argc, char *argv[]) //as arguments we send name od the file, w and k
 {
 	
 	FILE *f;
 	char* file_name=argv[1];
-	char *buffer = 0; //buffer u koji ce se spremiti sadrzaj datoteke kao niz
-	int length; //duljina buffera
-	int w=atoi(argv[2]); //sirina prozora
-	int k=atoi(argv[3]); //broj znakova k-mera
+	char *buffer = 0; //buffer that we will save content of file into
+	int length; //buffer length
+	int w=atoi(argv[2]); //window width
+	int k=atoi(argv[3]); //k-mer number of chars
 
 	f = fopen(file_name, "r");
 	
@@ -22,13 +22,13 @@ int main(int argc, char *argv[]) //kao argumente saljemo ime datoteke, w i k
 		printf("\n Datoteka se nije uspjesno otvorila");
 	else
 	{
-		//trazimo kraj datoteke pa tako i njenu duljinu,a onda se vracamo na pocetak datoteke
+		//we search the end of file and its length and after that go back to start
 		fseek (f, 0, SEEK_END);
 		length = ftell (f);
 		fseek (f, 0, SEEK_SET);
 		buffer = (char*)malloc(length); 
 	
-		//spremamo sadrzaj datoteke u buffer kao niz
+		//saving file content in buffer as a string of characters
 		if (buffer)
 		{
 			fread(buffer, 1, length, f);
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) //kao argumente saljemo ime datoteke, w i k
 
 	fclose(f);
 
-	Minimizers(buffer, w, k); //funkcija koja trazi minimizere
+	Minimizers(buffer, w, k); //function that searches for minimizers
 
 	return 0;
 }
